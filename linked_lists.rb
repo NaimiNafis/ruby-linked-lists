@@ -93,7 +93,7 @@ class LinkedList
 
   def to_s
     current = @head
-    string = ''
+    string = String.new
     until current.nil?
       string << " (#{current.value}) ->"
       current = current.next_node
@@ -173,3 +173,4 @@ end
 # test.append('jack')
 # test.append('bill')
 # test.append('gock')
+# test.prepend('cool')
