@@ -1,3 +1,5 @@
+require 'pry-byebug'
+
 class LinkedList
   attr_accessor :head
 
@@ -11,6 +13,7 @@ class LinkedList
       @head = new_node
     else
       current = @head
+      binding.pry
       current = current.next_node until current.next_node.nil?
       current.next_node = new_node
     end
@@ -23,23 +26,50 @@ class LinkedList
   end
 
   def size
-
+    count = 0
+    current = @head
+    until current.nil?
+      count += 1
+      current = current.next_node
+    end
+    count
   end
 
   def head
-
+    @head
   end
 
   def tail
+    current = @head
+    return nil if current.nil?
 
+    until current.next_node.nil?
+      current = current.next_node
+    end
+    current
   end
 
   def at(index)
-
+    count = 0
+    current = @head
+    while count != index && !current.nil?
+      current = current.next_node
+      count += 1
+    end
+    current
   end
 
   def pop
-
+    if @head.nil? || @head.next_node.nil?
+      @head = nil
+      return
+    else
+      current = @head
+      until current.next_node.next_node.nil?
+        current = current.next_node
+      end
+      current.next_node = nil
+    end
   end
 
   def contains?(value)
