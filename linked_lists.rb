@@ -106,6 +106,35 @@ class LinkedList
     string << " nil "
   end
 
+  # Extra Credit:
+
+  def insert_at(value, index)
+    new_node = Node.new(value)
+    current_index = 0
+
+    if index == 0
+      new_node.next_node = @head
+      @head = new_node
+      return
+    end
+
+    current = @head
+    previous = nil
+
+    while current != nil && current_index < index
+      previous = current
+      current = current.next_node
+      current_index += 1
+    end
+
+    if current_index == index
+      new_node.next_node = current
+      previous.next_node = new_node unless previous.nil?
+    else
+      puts "Index out of bounds"
+    end
+  end
+
 end
 
 class Node
@@ -116,3 +145,8 @@ class Node
     @next_node = next_node
   end
 end
+
+# test = LinkedList.new
+# test.append('jack')
+# test.append('bill')
+# test.append('gock')
