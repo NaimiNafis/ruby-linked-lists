@@ -121,12 +121,14 @@ class LinkedList
     current = @head
     previous = nil
 
+    # Traverse the list to find the position just before the insertion point
     while current != nil && current_index < index
       previous = current
       current = current.next_node
       current_index += 1
     end
 
+    # If the correct position is found and it's not out of bounds
     if current_index == index
       new_node.next_node = current
       previous.next_node = new_node unless previous.nil?
@@ -135,6 +137,32 @@ class LinkedList
     end
   end
 
+  def remove_at(index)
+    current_index = 0
+    return nil if @head.nil?
+
+    if index == 0
+      @head = @head.next_node
+      return
+    end
+
+    current = @head
+    previous = nil
+
+    # Traverse the list to find the node right before the one to be removed
+    while current != nil && current_index < index
+      previous = current
+      current = current.next_node
+      current_index += 1
+    end
+
+
+    if current != nil && current_index == index
+      previous.next_node = current.next_node # Bypass the current node, i.e. removing it
+    else
+      puts "Index out of bounds"
+    end
+  end
 end
 
 class Node
