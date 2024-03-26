@@ -13,7 +13,6 @@ class LinkedList
       @head = new_node
     else
       current = @head
-      binding.pry
       current = current.next_node until current.next_node.nil?
       current.next_node = new_node
     end
@@ -60,11 +59,13 @@ class LinkedList
   end
 
   def pop
+    # Check if the list is empty or contains only one node
     if @head.nil? || @head.next_node.nil?
       @head = nil
       return
     else
       current = @head
+      # Traverse the list until reaching the 2nd last node
       until current.next_node.next_node.nil?
         current = current.next_node
       end
@@ -73,11 +74,26 @@ class LinkedList
   end
 
   def contains?(value)
+    return false if @head.nil?
 
+    current = @head
+    while current != nil
+      return true if current.value == value
+      current = current.next_node
+    end
+    false
   end
 
   def find(value)
-
+    return nil if @head.nil?
+    index = 0
+    current = @head
+    while current != nil
+      return index if current.value == value
+      current = current.next_node
+      index += 1
+    end
+    nil
   end
 
   def to_s
