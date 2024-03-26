@@ -1,15 +1,25 @@
 class LinkedList
+  attr_accessor :head
 
-  def initialize
-
+  def initialize(head = nil)
+    @head = head
   end
 
   def append(value)
-
+    new_node = Node.new(value)
+    if @head.nil?
+      @head = new_node
+    else
+      current = @head
+      current = current.next_node until current.next_node.nil?
+      current.next_node = new_node
+    end
   end
 
   def prepend(value)
-
+    new_node = Node.new(value)
+    new_node.next_node = @head
+    @head = new_node
   end
 
   def size
@@ -46,10 +56,10 @@ class LinkedList
 end
 
 class Node
-  attr_accessor :data, :next_node
+  attr_accessor :value, :next_node
 
-  def initialize(data = nil, next_node = nil)
-    @data = data
+  def initialize(value = nil, next_node = nil)
+    @value = value
     @next_node = next_node
   end
 end
